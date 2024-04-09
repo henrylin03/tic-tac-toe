@@ -14,6 +14,16 @@ function createGameboard() {
   // getter for entire board that UI will eventually render
   const getBoard = () => board;
 
+  // TODO: add function to include logic of adding mark from player
+
+  // ? this might be removed / modified after we move to a UI version (rather than the current, console version)
+  const printBoard = () => {
+    const boardWithCellsMarked = board.map((row) =>
+      row.map((cell) => cell.getValue())
+    );
+    console.log(boardWithCellsMarked);
+  };
+
   return board;
 }
 
