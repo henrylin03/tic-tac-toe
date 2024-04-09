@@ -4,12 +4,15 @@ function createGameboard() {
   const board = [];
   const cell = createCell();
 
+  // row 0 is top, column 0 is left
   for (let r = 0; r < ROWS; r++) {
     board[r] = [];
     for (let c = 0; c < COLUMNS; c++) {
       board[r].push(cell);
     }
   }
+  // getter for entire board that UI will eventually render
+  const getBoard = () => board;
 
   return board;
 }
