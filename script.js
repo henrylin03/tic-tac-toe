@@ -1,12 +1,13 @@
 function createGameboard() {
-  const rows = 3;
-  const columns = 3;
+  const ROWS = 3;
+  const COLUMNS = 3;
   const board = [];
+  const cell = createCell();
 
-  for (let i = 0; i < rows; i++) {
-    board[i] = [];
-    for (let j = 0; j < columns; j++) {
-      board[i].push(createCell());
+  for (let r = 0; r < ROWS; r++) {
+    board[r] = [];
+    for (let c = 0; c < COLUMNS; c++) {
+      board[r].push(cell);
     }
   }
 
@@ -16,7 +17,7 @@ function createGameboard() {
 function createCell() {
   let value = 0;
 
-  // accept player's mark ("x" or "o") to change value of cell
+  // accept player's mark ("x" or "o") to change value of cell //? connect four example just took player 1 or 2 as values rather than colours. we may need to convert this later.
   const addMark = (mark) => (value = mark);
   // retrieve current value of cell through closure
   const getValue = () => value;
@@ -26,5 +27,3 @@ function createCell() {
 
 const gameboard = createGameboard();
 console.log(gameboard);
-const cell = createCell();
-console.log(cell);
