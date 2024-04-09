@@ -24,7 +24,8 @@ function createGameboard() {
     console.log(boardWithCellsMarked);
   };
 
-  return board;
+  // return _interface_ (rather than board itself) for rest of application to interact with gameboard
+  return { getBoard, printBoard };
 }
 
 function createCell() {
@@ -37,6 +38,3 @@ function createCell() {
 
   return { addMark, getValue };
 }
-
-const gameboard = createGameboard();
-console.log(gameboard);
