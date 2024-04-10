@@ -48,11 +48,11 @@ function createCell() {
   let value = null;
 
   // accept player's mark ("x" or "o") to change value of cell
-  const registerMarker = (marker) => (value = marker);
+  const setMarker = (marker) => (value = marker);
   // retrieve current value of cell through closure
   const getValue = () => value;
 
-  return { registerMarker, getValue };
+  return { setMarker, getValue };
 }
 
 // GameController will control flow and state of game's turn, and win/loss/tie
