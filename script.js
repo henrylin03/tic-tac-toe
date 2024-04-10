@@ -96,31 +96,45 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
     const checkedCells = [];
     for (let r = 0; r < printedBoard.length; r++) {
       for (let c = 0; c < printedBoard[r].length; c++) {
+        console.log(r, c);
         const currentCellMarker = printedBoard[r][c];
-        const cellRight = printedBoard[r][c + 1];
-        const cellBelow = printedBoard[r + 1][c];
-        const cellBottomRight = printedBoard[r + 1][c + 1];
-        const cellBottomLeft = printedBoard[r + 1][c - 1];
-
-        const winByRow =
-          currentCellMarker === cellRight &&
-          currentCellMarker === printedBoard[r][c + 2];
-        const winByColumn =
-          currentCellMarker === cellBelow &&
-          currentCellMarker === printedBoard[r + 2][c];
-        const winByDiagonal =
-          (currentCellMarker === cellBottomRight &&
-            currentCellMarker === printedBoard[r + 2][c + 2]) ||
-          (currentCellMarker === cellBottomLeft &&
-            currentCellMarker === printedBoard[r + 2][c - 2]);
 
         // find first cell, from left to right, top to bottom
         if (currentCellMarker === null) continue;
-        if (winByRow || winByColumn || winByDiagonal)
-          return console.log(
-            `${currentCellMarker === "x" ? "Player 1" : "Player 2"} wins!`
-          );
-        checkedCells.push([r, c]);
+
+        const relativeCellPositions = {
+          right: printedBoard[r][c + 1],
+          down: printedBoard[r + 1][c],
+          bottomRight: printedBoard[r + 1][c + 1],
+          bottomLeft: printedBoard[r + 1][c - 1],
+        };
+
+        for (const adjacent of Object.values(relativeCellPositions)) {
+          try {
+            console.log(adjacent);
+          } catch (error) {
+            alert("YO!");
+            console.log("no adjacent cells in that direction");
+          }
+        }
+
+        // const winByRow =
+        //   currentCellMarker === cellRight &&
+        //   currentCellMarker === printedBoard[r][c + 2];
+        // const winByColumn =
+        //   currentCellMarker === cellBelow &&
+        //   currentCellMarker === printedBoard[r + 2][c];
+        // const winByDiagonal =
+        //   (currentCellMarker === cellBottomRight &&
+        //     currentCellMarker === printedBoard[r + 2][c + 2]) ||
+        //   (currentCellMarker === cellBottomLeft &&
+        //     currentCellMarker === printedBoard[r + 2][c - 2]);
+
+        // if (winByRow || winByColumn || winByDiagonal)
+        //   return console.log(
+        //     `${currentCellMarker === "x" ? "Player 1" : "Player 2"} wins!`
+        //   );
+        // checkedCells.push([r, c]);
 
         // const isCentreCell = r === 1 && c === 1;
         // if (isCentreCell)
@@ -130,8 +144,6 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
         // if the first marked cell found is the centre, in addition to above checks, also check diagonals (4 more)
 
         // once checked, that cell should NOT be checked again
-
-        console.log(`(${r}, ${c}), ${printedBoard[r][c]}`); //todo: remove this once done. this was just to troubleshoot in real time.
       }
     }
 
