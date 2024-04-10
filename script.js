@@ -1,3 +1,4 @@
+// ? this should probably be an IIFE if only used once
 function createGameboard() {
   const ROWS = 3;
   const COLUMNS = 3;
@@ -37,4 +38,17 @@ function createCell() {
   const getValue = () => value;
 
   return { addMark, getValue };
+}
+
+// GameController will control flow and state of game's turn, and win/loss/tie
+// ? this should probably be an IIFE if only used once
+function createGameController(
+  playerOneName = "player1",
+  playerTwoName = "player2"
+) {
+  const board = createGameboard();
+  const players = [
+    { name: playerOneName, mark: "x" },
+    { name: playerTwoName, mark: "o" },
+  ];
 }
