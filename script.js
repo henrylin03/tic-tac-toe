@@ -122,13 +122,38 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
     // CHECK IF WON BY DIAGONAL
     // to win by diagonal, the centre value needs to be there
     const centreCell = printedBoard[1][1];
-    const cornerCellsLookup = {
-      topLeft: printedBoard[(0, 0)],
-      topRight: printedBoard[(0, 2)],
-      bottomLeft: printedBoard[(2, 0)],
-      bottomRight: printedBoard[(2, 2)],
-    };
+
     if (centreCell != null) {
+      const cornerCellsLookup = {
+        topLeft: printedBoard[0][0],
+        topRight: printedBoard[0][2],
+        bottomLeft: printedBoard[2][0],
+        bottomRight: printedBoard[2][2],
+      };
+      const topLeftToBottomRightDiagonalArr = [
+        centreCell,
+        cornerCellsLookup.topLeft,
+        cornerCellsLookup.bottomRight,
+      ];
+      const topRightToBottomLeftDiagonalArr = [
+        centreCell,
+        cornerCellsLookup.topRight,
+        cornerCellsLookup.bottomLeft,
+      ];
+
+      console.log(
+        topLeftToBottomRightDiagonalArr,
+        topRightToBottomLeftDiagonalArr
+      );
+
+      const isSameMarker = (arr) =>
+        arr.every((currentValue) => currentValue === centreCell);
+
+      if (
+        isSameMarker(topLeftToBottomRightDiagonalArr) ||
+        isSameMarker(topRightToBottomLeftDiagonalArr)
+      )
+        return console.log(`${centreCell} wins!`);
     }
 
     // if no 3 in a row at all, check if there are any free spaces left. if no free space, then end and say tie.
