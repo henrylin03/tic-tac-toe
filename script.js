@@ -84,4 +84,9 @@ function createGameController(
     switchPlayerTurns();
     printNewRound();
   };
+
+  // running
+  printNewRound();
+
+  return { playRound, getActivePlayer };
 }
