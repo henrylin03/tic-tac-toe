@@ -83,17 +83,6 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
 
     // check winning condition
     const printedBoard = board.printBoard();
-    const markersOnTheBoard = printedBoard.flat(1).filter((c) => c).length;
-
-    // if there are less than 5 markers total (3 x's minimum), don't even check. x can't win.
-    // if (markersCount >= 5) {
-    //   for (let r = 0; r < printedBoard.length; r++) {
-    //     for (let c = 0; c < r.length; c++) {
-    //       console.log(`${(r, c)}, ${printedBoard[r][c]}`);
-    //     }
-    //   }
-    // }
-    //todo: uncomment out check to make sure markersCount > 5 first before winning conditions checked
 
     // CHECK IF WON BY 3 IN A ROW
     for (let r = 0; r < printedBoard.length; r++) {
@@ -122,7 +111,6 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
     // CHECK IF WON BY DIAGONAL
     // to win by diagonal, the centre value needs to be there
     const centreCell = printedBoard[1][1];
-
     if (centreCell != null) {
       const cornerCellsLookup = {
         topLeft: printedBoard[0][0],
@@ -141,11 +129,6 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
         cornerCellsLookup.bottomLeft,
       ];
 
-      console.log(
-        topLeftToBottomRightDiagonalArr,
-        topRightToBottomLeftDiagonalArr
-      );
-
       const isSameMarker = (arr) =>
         arr.every((currentValue) => currentValue === centreCell);
 
@@ -156,7 +139,10 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
         return console.log(`${centreCell} wins!`);
     }
 
-    // if no 3 in a row at all, check if there are any free spaces left. if no free space, then end and say tie.
+    // then, if there are no more free spaces, it is a tie.
+    const printedBoardFlattened = printedBoard.flat(1);
+    if (!printedBoardFlattened.includes(null))
+      return console.log("it's a tie!");
 
     // if no and game should continue, then run the following (switch players, then print new round)
     switchPlayers();
