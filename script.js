@@ -35,7 +35,7 @@ function createGameboard() {
   };
 
   // return _interface_ (rather than board itself) for rest of application to interact with gameboard
-  return { getBoard, printBoard };
+  return { getBoard, addMark, printBoard };
 }
 
 function createCell() {
@@ -52,8 +52,8 @@ function createCell() {
 // GameController will control flow and state of game's turn, and win/loss/tie
 // ? this should probably be an IIFE if only used once
 function createGameController(
-  playerOneName = "player1",
-  playerTwoName = "player2"
+  playerOneName = "Player 1",
+  playerTwoName = "Player 2"
 ) {
   const board = createGameboard();
   const players = [
@@ -90,3 +90,5 @@ function createGameController(
 
   return { playRound, getActivePlayer };
 }
+
+const game = createGameController();
