@@ -120,6 +120,16 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
     }
 
     // CHECK IF WON BY DIAGONAL
+    // to win by diagonal, the centre value needs to be there
+    const centreCell = printedBoard[1][1];
+    const cornerCellsLookup = {
+      topLeft: printedBoard[(0, 0)],
+      topRight: printedBoard[(0, 2)],
+      bottomLeft: printedBoard[(2, 0)],
+      bottomRight: printedBoard[(2, 2)],
+    };
+    if (centreCell != null) {
+    }
 
     // if no 3 in a row at all, check if there are any free spaces left. if no free space, then end and say tie.
 
