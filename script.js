@@ -86,11 +86,18 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
     const markersCount = printedBoardFlattened.filter((c) => c).length;
 
     // if there are less than 5 markers total (3 x's minimum), don't even check. x can't win.
-    if (markersCount >= 5) {
-      // check winning condition
+    // if (markersCount >= 5) {
+    //   for (let r = 0; r < printedBoard.length; r++) {
+    //     for (let c = 0; c < r.length; c++) {
+    //       console.log(`${(r, c)}, ${printedBoard[r][c]}`);
+    //     }
+    //   }
+    // }
+    for (let r = 0; r < printedBoard.length; r++) {
+      for (let c = 0; c < printedBoard[r].length; c++) {
+        console.log(`(${r}, ${c}), ${printedBoard[r][c]}`);
+      }
     }
-
-    // if there are 5+ markers total, check x only.
 
     // if there are 6+ markers total, check both x and o for win conditions.
 
