@@ -44,7 +44,6 @@ function createCell() {
 }
 
 // GameController will control flow and state of game's turn, and win/loss/tie
-// ? this should probably be an IIFE if only used once
 const game = (function (
   playerOneName = "Player 1",
   playerTwoName = "Player 2"
