@@ -17,7 +17,7 @@ function createGameboard() {
 
   const addMark = (row, column, player) => {
     const availableCells = board
-      .filter((row) => row[column].getValue() === 0)
+      .filter((row) => row[column].getValue() === null)
       .map((row) => row[column]);
 
     if (!availableCells.length) return;
@@ -39,7 +39,7 @@ function createGameboard() {
 }
 
 function createCell() {
-  let value = 0;
+  let value = null;
 
   // accept player's mark ("x" or "o") to change value of cell
   const registerMark = (mark) => (value = mark);
@@ -80,6 +80,8 @@ function createGameController(
       }'s mark into position ${row}, ${column} (row, column)`
     );
     board.addMark(row, column, getActivePlayer().mark);
+
+    // TODO: placeholder for win condition and output (eg winner message)
 
     switchPlayerTurns();
     printNewRound();
