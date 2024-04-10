@@ -72,6 +72,7 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
   };
 
   const playRound = (row, column) => {
+    // add markers
     console.log(
       `adding ${
         getActivePlayer().name
@@ -79,12 +80,15 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
     );
     board.addMarker(row, column, getActivePlayer().marker);
 
+    // check winning condition
     const printedBoard = board.printBoard();
     const printedBoardFlattened = printedBoard.flat(1);
     const markersCount = printedBoardFlattened.filter((c) => c).length;
-    console.log(markersCount, "markersCount");
 
     // if there are less than 5 markers total (3 x's minimum), don't even check. x can't win.
+    if (markersCount >= 5) {
+      // check winning condition
+    }
 
     // if there are 5+ markers total, check x only.
 
