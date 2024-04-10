@@ -94,13 +94,16 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
     // }
     //todo: uncomment out check to make sure markersCount > 5 first before winning conditions checked
 
-    for (const row of printedBoard) {
-      if (row.every((currentValue) => currentValue === null)) continue;
-      if (row.every((currentValue) => currentValue === row[0])) {
-        return console.log("you win!");
+    for (const r of printedBoard) {
+      // skip rows if they are all empty
+      if (r.every((currentValue) => currentValue === null)) continue;
+      if (r.every((currentValue) => currentValue === r[0])) {
+        return console.log(`${r[0]} wins!`);
+      }
+      for (const c of r) {
+        console.log("currently on", c);
       }
     }
-
     // check if any 3 continuous for column
     // console.log(printedBoard[row][column]);
 
