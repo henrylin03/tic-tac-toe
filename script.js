@@ -45,7 +45,7 @@ function createCell() {
 
 // GameController will control flow and state of game's turn, and win/loss/tie
 // ? this should probably be an IIFE if only used once
-function createGameController(
+const game = (function (
   playerOneName = "Player 1",
   playerTwoName = "Player 2"
 ) {
@@ -144,7 +144,6 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
     if (!printedBoardFlattened.includes(null))
       return console.log("it's a tie!");
 
-    // if no and game should continue, then run the following (switch players, then print new round)
     switchPlayers();
     printNewRound();
   };
@@ -153,6 +152,4 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
   printNewRound();
 
   return { playRound };
-}
-
-const game = createGameController();
+})();
