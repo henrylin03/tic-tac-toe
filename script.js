@@ -15,15 +15,15 @@ function createGameboard() {
   // getter for entire board that UI will eventually render
   const getBoard = () => board;
 
-  const addMark = (row, column, player) => {
+  const addMark = (row, column, mark) => {
     const availableCells = board
       .filter((row) => row[column].getValue() === null)
       .map((row) => row[column]);
 
     if (!availableCells.length) return;
-    board[row][column].registerMark(player);
+    board[row][column].registerMark(mark);
 
-    console.log(availableCells);
+    console.log("availableCells", availableCells);
   };
 
   // ? this might be removed / modified after we move to a UI version (rather than the current, console version)
@@ -31,7 +31,7 @@ function createGameboard() {
     const boardWithCellsMarked = board.map((row) =>
       row.map((cell) => cell.getValue())
     );
-    console.log(boardWithCellsMarked);
+    console.log("boardWithCellsMarked", boardWithCellsMarked);
   };
 
   // return _interface_ (rather than board itself) for rest of application to interact with gameboard
@@ -90,7 +90,7 @@ function createGameController(
   // running
   printNewRound();
 
-  return { playRound, getActivePlayer };
+  return { playRound };
 }
 
 const game = createGameController();
