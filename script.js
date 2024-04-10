@@ -93,8 +93,44 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
     //   }
     // }
     //todo: uncomment out check to make sure markersCount > 5 first before winning conditions checked
+    const checkedCells = [];
     for (let r = 0; r < printedBoard.length; r++) {
       for (let c = 0; c < printedBoard[r].length; c++) {
+        const currentCellMarker = printedBoard[r][c];
+        const cellRight = printedBoard[r][c + 1];
+        const cellBelow = printedBoard[r + 1][c];
+        const cellBottomRight = printedBoard[r + 1][c + 1];
+        const cellBottomLeft = printedBoard[r + 1][c - 1];
+
+        const winByRow =
+          currentCellMarker === cellRight &&
+          currentCellMarker === printedBoard[r][c + 2];
+        const winByColumn =
+          currentCellMarker === cellBelow &&
+          currentCellMarker === printedBoard[r + 2][c];
+        const winByDiagonal =
+          (currentCellMarker === cellBottomRight &&
+            currentCellMarker === printedBoard[r + 2][c + 2]) ||
+          (currentCellMarker === cellBottomLeft &&
+            currentCellMarker === printedBoard[r + 2][c - 2]);
+
+        // find first cell, from left to right, top to bottom
+        if (currentCellMarker === null) continue;
+        if (winByRow || winByColumn || winByDiagonal)
+          return console.log(
+            `${currentCellMarker === "x" ? "Player 1" : "Player 2"} wins!`
+          );
+        checkedCells.push([r, c]);
+
+        // const isCentreCell = r === 1 && c === 1;
+        // if (isCentreCell)
+        // if (printedBoard[r][c] === printedBoard[r + 1][c])
+        // at the first marked cell, check if the cells to the , right, , and down are the same. (we wouldn't check left because that would have already been checked...)
+
+        // if the first marked cell found is the centre, in addition to above checks, also check diagonals (4 more)
+
+        // once checked, that cell should NOT be checked again
+
         console.log(`(${r}, ${c}), ${printedBoard[r][c]}`); //todo: remove this once done. this was just to troubleshoot in real time.
       }
     }
