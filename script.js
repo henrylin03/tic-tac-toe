@@ -82,7 +82,7 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
 
     // check winning condition
     const printedBoard = board.printBoard();
-    const markersCount = printedBoard.flat(1).filter((c) => c).length;
+    const markersOnTheBoard = printedBoard.flat(1).filter((c) => c).length;
 
     // if there are less than 5 markers total (3 x's minimum), don't even check. x can't win.
     // if (markersCount >= 5) {
@@ -93,61 +93,13 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
     //   }
     // }
     //todo: uncomment out check to make sure markersCount > 5 first before winning conditions checked
-    const checkedCells = [];
-    for (let r = 0; r < printedBoard.length; r++) {
-      for (let c = 0; c < printedBoard[r].length; c++) {
-        console.log(r, c);
-        const currentCellMarker = printedBoard[r][c];
 
-        // find first cell, from left to right, top to bottom
-        if (currentCellMarker === null) continue;
-
-        const relativeCellPositions = {
-          right: printedBoard[r][c + 1],
-          down: printedBoard[r + 1][c],
-          bottomRight: printedBoard[r + 1][c + 1],
-          bottomLeft: printedBoard[r + 1][c - 1],
-        };
-
-        for (const adjacent of Object.values(relativeCellPositions)) {
-          try {
-            console.log(adjacent);
-          } catch (error) {
-            alert("YO!");
-            console.log("no adjacent cells in that direction");
-          }
-        }
-
-        // const winByRow =
-        //   currentCellMarker === cellRight &&
-        //   currentCellMarker === printedBoard[r][c + 2];
-        // const winByColumn =
-        //   currentCellMarker === cellBelow &&
-        //   currentCellMarker === printedBoard[r + 2][c];
-        // const winByDiagonal =
-        //   (currentCellMarker === cellBottomRight &&
-        //     currentCellMarker === printedBoard[r + 2][c + 2]) ||
-        //   (currentCellMarker === cellBottomLeft &&
-        //     currentCellMarker === printedBoard[r + 2][c - 2]);
-
-        // if (winByRow || winByColumn || winByDiagonal)
-        //   return console.log(
-        //     `${currentCellMarker === "x" ? "Player 1" : "Player 2"} wins!`
-        //   );
-        // checkedCells.push([r, c]);
-
-        // const isCentreCell = r === 1 && c === 1;
-        // if (isCentreCell)
-        // if (printedBoard[r][c] === printedBoard[r + 1][c])
-        // at the first marked cell, check if the cells to the , right, , and down are the same. (we wouldn't check left because that would have already been checked...)
-
-        // if the first marked cell found is the centre, in addition to above checks, also check diagonals (4 more)
-
-        // once checked, that cell should NOT be checked again
+    for (const row of printedBoard) {
+      if (row.every((currentValue) => currentValue === null)) continue;
+      if (row.every((currentValue) => currentValue === row[0])) {
+        return console.log("you win!");
       }
     }
-
-    // if there are 6+ markers total, check both x and o for win conditions.
 
     // check if any 3 continuous for column
     // console.log(printedBoard[row][column]);
