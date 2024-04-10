@@ -71,6 +71,7 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
     }" to those coordinates.`);
   };
 
+  // todo: create function called "findWinner" or something that can be used to output the winning player's name
   const playRound = (row, column) => {
     // add markers
     console.log(
@@ -105,6 +106,7 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
         return console.log(`${printedBoard[r][0]} wins!`);
     }
 
+    // CHECK IF WON BY 3 IN A COLUMN
     for (let c = 0; c < printedBoard[0].length; c++) {
       const colArray = [
         printedBoard[0][c],
@@ -117,33 +119,7 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
         return console.log(`${colArray[0]} wins!`);
     }
 
-    // CHECK IF WON BY 3 IN A COLUMN
-    // for (let c = 0; c < printedBoard.length; c++) {
-    //   if [printedBoard]
-    // }
-
     // CHECK IF WON BY DIAGONAL
-
-    // for row where there are non-empty cells, check if there is a win by column
-    // for (let colIdx = 0; colIdx < r.length; colIdx++) {
-    //   if (
-    //     printedBoard[r][colIdx] === printedBoard[r + 1][colIdx] &&
-    //     printedBoard[r][colIdx] === printedBoard[r + 2][colIdx]
-    //   )
-    //     return console.log(`${r[colIdx]} wins!`);
-    // }
-    // check if any 3 continuous for column
-    // console.log(printedBoard[row][column]);
-
-    // find first non-null cell
-    // for (let r = 0; r < printedBoard.length; r++) {
-    //   const flat = printedBoard.flat(1);
-    //   console.log(flat);
-    // }
-
-    // check if any 3 continuous for row
-
-    // check if any 3 in a row for diagonal (x2)
 
     // if no 3 in a row at all, check if there are any free spaces left. if no free space, then end and say tie.
 
