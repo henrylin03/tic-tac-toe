@@ -62,7 +62,7 @@ function createGameController(
   ];
 
   let activePlayer = players[0];
-  const switchPlayersTurns = () => {
+  const switchPlayerTurns = () => {
     activePlayer = activePlayer === players[0] ? players[1] : players[0];
   };
   const getActivePlayer = () => activePlayer;
@@ -80,5 +80,8 @@ function createGameController(
       }'s mark into position ${row}, ${column} (row, column)`
     );
     board.addMark(row, column, getActivePlayer().mark);
+
+    switchPlayerTurns();
+    printNewRound();
   };
 }
