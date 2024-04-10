@@ -19,6 +19,7 @@ function createGameboard() {
     const availableCells = board
       .filter((row) => row[column].getValue() === 0)
       .map((row) => row[column]);
+
     if (!availableCells.length) return;
     board[row][column].registerMark(player);
 
@@ -40,7 +41,7 @@ function createGameboard() {
 function createCell() {
   let value = 0;
 
-  // accept player's mark ("x" or "o") to change value of cell //? connect four example just took player 1 or 2 as values rather than colours. we may need to convert this later.
+  // accept player's mark ("x" or "o") to change value of cell
   const registerMark = (mark) => (value = mark);
   // retrieve current value of cell through closure
   const getValue = () => value;
@@ -59,8 +60,8 @@ function createGameController(
     { name: playerOneName, mark: "x" },
     { name: playerTwoName, mark: "o" },
   ];
-  let activePlayer = players[0];
 
+  let activePlayer = players[0];
   const switchPlayersTurns = () => {
     activePlayer = activePlayer === players[0] ? players[1] : players[0];
   };
@@ -69,5 +70,15 @@ function createGameController(
   const printNewRound = () => {
     board.printBoard();
     console.log(`${getActivePlayer().name}'s turn.`);
+  };
+
+  const playRound = (row, column) => {
+    // add mark to chosen row and column, for current player
+    console.log(
+      `adding ${
+        getActivePlayer().name
+      }'s mark into position ${row}, ${column} (row, column)`
+    );
+    board.addMark(row, column, getActivePlayer().mark);
   };
 }
