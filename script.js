@@ -51,4 +51,10 @@ function createGameController(
     { name: playerOneName, mark: "x" },
     { name: playerTwoName, mark: "o" },
   ];
+  let activePlayer = players[0];
+
+  const switchPlayersTurns = () => {
+    activePlayer = activePlayer === players[0] ? players[1] : players[0];
+  };
+  const getActivePlayer = () => activePlayer;
 }
