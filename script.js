@@ -12,19 +12,23 @@ function createGameboard() {
       board[r].push(cell);
     }
   }
-  // getter for entire board that UI will eventually render
+
   const getBoard = () => board;
-
-  const addMark = (row, column, mark) => {
-    const availableCells = board
-      .filter((row) => row[column].getValue() === null)
-      .map((row) => row[column]);
-
-    if (!availableCells.length) return;
-    board[row][column].registerMark(mark);
-
-    console.log("availableCells", availableCells);
+  const addMarker = (rowIdx, columnIdx, marker) => {
+    // show user what cells are available
+    return;
   };
+
+  //   const addMark = (row, column, mark) => {
+  //     const availableCells = board
+  //       .filter((row) => row[column].getValue() === null)
+  //       .map((row) => row[column]);
+
+  //     if (!availableCells.length) return;
+  //     board[row][column].registerMark(mark);
+
+  //     console.log("availableCells", availableCells);
+  //   };
 
   // ? this might be removed / modified after we move to a UI version (rather than the current, console version)
   const printBoard = () => {
@@ -35,18 +39,18 @@ function createGameboard() {
   };
 
   // return _interface_ (rather than board itself) for rest of application to interact with gameboard
-  return { getBoard, addMark, printBoard };
+  return { getBoard, addMarker, printBoard };
 }
 
 function createCell() {
   let value = null;
 
   // accept player's mark ("x" or "o") to change value of cell
-  const registerMark = (mark) => (value = mark);
+  const registerMarker = (marker) => (value = marker);
   // retrieve current value of cell through closure
   const getValue = () => value;
 
-  return { registerMark, getValue };
+  return { registerMarker, getValue };
 }
 
 // GameController will control flow and state of game's turn, and win/loss/tie
@@ -57,8 +61,8 @@ function createGameController(
 ) {
   const board = createGameboard();
   const players = [
-    { name: playerOneName, mark: "x" },
-    { name: playerTwoName, mark: "o" },
+    { name: playerOneName, marker: "x" },
+    { name: playerTwoName, marker: "o" },
   ];
 
   let activePlayer = players[0];
@@ -69,7 +73,11 @@ function createGameController(
 
   const printNewRound = () => {
     board.printBoard();
-    console.log(`${getActivePlayer().name}'s turn.`);
+    console.log(`${getActivePlayer().name}'s turn.
+    
+Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
+      getActivePlayer().marker
+    }" to those coordinates.`);
   };
 
   const playRound = (row, column) => {
@@ -79,7 +87,7 @@ function createGameController(
         getActivePlayer().name
       }'s mark into position ${row}, ${column} (row, column)`
     );
-    board.addMark(row, column, getActivePlayer().mark);
+    board.addMarker(row, column, getActivePlayer().marker);
 
     // TODO: placeholder for win condition and output (eg winner message)
 
