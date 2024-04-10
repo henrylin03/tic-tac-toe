@@ -80,7 +80,8 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
     board.addMarker(row, column, getActivePlayer().marker);
 
     // check if any 3 continuous for column
-
+    const printedBoard = board.printBoard();
+    // console.log(printedBoard[row][column]);
     // check if any 3 continuous for row
 
     // check if any 3 in a row for diagonal (x2)
