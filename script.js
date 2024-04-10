@@ -11,15 +11,13 @@ function createGameboard() {
   }
 
   const getBoard = () => board;
+
   const addMarker = (rowIdx, columnIdx, marker) => {
     const selectedCell = board[rowIdx][columnIdx];
-
     if (selectedCell.getValue() !== null) return;
-
     selectedCell.setMarker(marker);
   };
 
-  // ? this might be removed / modified after we move to a UI version (rather than the current, console version)
   const printBoard = () => {
     const boardWithCellsMarked = board.map((r) =>
       r.map((cell) => cell.getValue())
@@ -28,16 +26,13 @@ function createGameboard() {
     return boardWithCellsMarked;
   };
 
-  // return _interface_ (rather than board itself) for rest of application to interact with gameboard
   return { getBoard, addMarker, printBoard };
 }
 
 function createCell() {
   let value = null;
 
-  // accept player's mark ("x" or "o") to change value of cell
   const setMarker = (marker) => (value = marker);
-  // retrieve current value of cell through closure
   const getValue = () => value;
 
   return { setMarker, getValue };
