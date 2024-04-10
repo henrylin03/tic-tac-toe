@@ -25,6 +25,7 @@ function createGameboard() {
       r.map((cell) => cell.getValue())
     );
     console.log(boardWithCellsMarked);
+    return boardWithCellsMarked;
   };
 
   // return _interface_ (rather than board itself) for rest of application to interact with gameboard
@@ -71,7 +72,6 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
   };
 
   const playRound = (row, column) => {
-    // add mark to chosen row and column, for current player
     console.log(
       `adding ${
         getActivePlayer().name
@@ -79,9 +79,9 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
     );
     board.addMarker(row, column, getActivePlayer().marker);
 
-    // check if any 3 in a row for column
+    // check if any 3 continuous for column
 
-    // check if any 3 in a row for row
+    // check if any 3 continuous for row
 
     // check if any 3 in a row for diagonal (x2)
 
