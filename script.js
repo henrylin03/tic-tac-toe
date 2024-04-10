@@ -3,7 +3,6 @@ function createGameboard() {
   const COLUMNS = 3;
   const board = [];
 
-  // row 0 is top, column 0 is left
   for (let r = 0; r < ROWS; r++) {
     board[r] = [];
     for (let c = 0; c < COLUMNS; c++) {
@@ -13,27 +12,12 @@ function createGameboard() {
 
   const getBoard = () => board;
   const addMarker = (rowIdx, columnIdx, marker) => {
-    if (board[rowIdx][columnIdx].getValue() !== null)
-      console.log("already marker there");
-    else console.log("ok let's mark it there");
-    // show user what cells are available??
+    const selectedCell = board[rowIdx][columnIdx];
 
-    // if the cell is not available, ask to try again
+    if (selectedCell.getValue() !== null) return;
 
-    // if the cell is available, register it using cell.registerMarker();
-    return;
+    selectedCell.setMarker(marker);
   };
-
-  //   const addMark = (row, column, mark) => {
-  //     const availableCells = board
-  //       .filter((row) => row[column].getValue() === null)
-  //       .map((row) => row[column]);
-
-  //     if (!availableCells.length) return;
-  //     board[row][column].registerMark(mark);
-
-  //     console.log("availableCells", availableCells);
-  //   };
 
   // ? this might be removed / modified after we move to a UI version (rather than the current, console version)
   const printBoard = () => {
