@@ -82,8 +82,7 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
 
     // check winning condition
     const printedBoard = board.printBoard();
-    const printedBoardFlattened = printedBoard.flat(1);
-    const markersCount = printedBoardFlattened.filter((c) => c).length;
+    const markersCount = printedBoard.flat(1).filter((c) => c).length;
 
     // if there are less than 5 markers total (3 x's minimum), don't even check. x can't win.
     // if (markersCount >= 5) {
@@ -93,9 +92,10 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
     //     }
     //   }
     // }
+    //todo: uncomment out check to make sure markersCount > 5 first before winning conditions checked
     for (let r = 0; r < printedBoard.length; r++) {
       for (let c = 0; c < printedBoard[r].length; c++) {
-        console.log(`(${r}, ${c}), ${printedBoard[r][c]}`);
+        console.log(`(${r}, ${c}), ${printedBoard[r][c]}`); //todo: remove this once done. this was just to troubleshoot in real time.
       }
     }
 
