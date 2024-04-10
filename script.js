@@ -1,21 +1,23 @@
-// ? this should probably be an IIFE if only used once
 function createGameboard() {
   const ROWS = 3;
   const COLUMNS = 3;
   const board = [];
-  const cell = createCell();
 
   // row 0 is top, column 0 is left
   for (let r = 0; r < ROWS; r++) {
     board[r] = [];
     for (let c = 0; c < COLUMNS; c++) {
-      board[r].push(cell);
+      board[r].push(createCell());
     }
   }
 
   const getBoard = () => board;
   const addMarker = (rowIdx, columnIdx, marker) => {
-    // show user what cells are available
+    // show user what cells are available??
+
+    // if the cell is not available, ask to try again
+
+    // if the cell is available, register it using cell.registerMarker();
     return;
   };
 
@@ -32,10 +34,10 @@ function createGameboard() {
 
   // ? this might be removed / modified after we move to a UI version (rather than the current, console version)
   const printBoard = () => {
-    const boardWithCellsMarked = board.map((row) =>
-      row.map((cell) => cell.getValue())
+    const boardWithCellsMarked = board.map((r) =>
+      r.map((cell) => cell.getValue())
     );
-    console.log("boardWithCellsMarked", boardWithCellsMarked);
+    console.log(boardWithCellsMarked);
   };
 
   // return _interface_ (rather than board itself) for rest of application to interact with gameboard
