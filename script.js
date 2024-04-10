@@ -13,6 +13,9 @@ function createGameboard() {
 
   const getBoard = () => board;
   const addMarker = (rowIdx, columnIdx, marker) => {
+    if (board[rowIdx][columnIdx].getValue() !== null)
+      console.log("already marker there");
+    else console.log("ok let's mark it there");
     // show user what cells are available??
 
     // if the cell is not available, ask to try again
@@ -68,7 +71,8 @@ function createGameController(
   ];
 
   let activePlayer = players[0];
-  const switchPlayerTurns = () => {
+
+  const switchPlayers = () => {
     activePlayer = activePlayer === players[0] ? players[1] : players[0];
   };
   const getActivePlayer = () => activePlayer;
@@ -93,7 +97,7 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
 
     // TODO: placeholder for win condition and output (eg winner message)
 
-    switchPlayerTurns();
+    switchPlayers();
     printNewRound();
   };
 
