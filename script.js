@@ -79,8 +79,15 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
     );
     board.addMarker(row, column, getActivePlayer().marker);
 
-    // TODO: placeholder for win condition and output (eg winner message)
+    // check if any 3 in a row for column
 
+    // check if any 3 in a row for row
+
+    // check if any 3 in a row for diagonal (x2)
+
+    // if no 3 in a row at all, check if there are any free spaces left. if no free space, then end and say tie.
+
+    // if no and game should continue, then run the following (switch players, then print new round)
     switchPlayers();
     printNewRound();
   };
