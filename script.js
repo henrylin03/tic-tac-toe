@@ -75,7 +75,7 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
     console.log(
       `adding ${
         getActivePlayer().name
-      }'s mark into position ${row}, ${column} (row, column)`
+      }'s mark into coordinates: row ${row}, column ${column} (zero-indexed)`
     );
     board.addMarker(row, column, getActivePlayer().marker);
 
