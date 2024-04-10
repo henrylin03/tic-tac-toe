@@ -33,11 +33,11 @@ function createCell() {
   let value = 0;
 
   // accept player's mark ("x" or "o") to change value of cell //? connect four example just took player 1 or 2 as values rather than colours. we may need to convert this later.
-  const addMark = (mark) => (value = mark);
+  const registerMark = (mark) => (value = mark);
   // retrieve current value of cell through closure
   const getValue = () => value;
 
-  return { addMark, getValue };
+  return { registerMark, getValue };
 }
 
 // GameController will control flow and state of game's turn, and win/loss/tie
