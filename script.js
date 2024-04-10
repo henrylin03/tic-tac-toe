@@ -94,16 +94,44 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
     // }
     //todo: uncomment out check to make sure markersCount > 5 first before winning conditions checked
 
-    for (const r of printedBoard) {
-      // skip rows if they are all empty
-      if (r.every((currentValue) => currentValue === null)) continue;
-      if (r.every((currentValue) => currentValue === r[0])) {
-        return console.log(`${r[0]} wins!`);
-      }
-      for (const c of r) {
-        console.log("currently on", c);
-      }
+    // CHECK IF WON BY 3 IN A ROW
+    for (let r = 0; r < printedBoard.length; r++) {
+      if (printedBoard[r].includes(null)) continue;
+      if (
+        printedBoard[r].every(
+          (currentValue) => currentValue === printedBoard[r][0]
+        )
+      )
+        return console.log(`${printedBoard[r][0]} wins!`);
     }
+
+    for (let c = 0; c < printedBoard[0].length; c++) {
+      const colArray = [
+        printedBoard[0][c],
+        printedBoard[1][c],
+        printedBoard[2][c],
+      ];
+
+      if (colArray.includes(null)) continue;
+      if (colArray.every((currentValue) => currentValue === colArray[0]))
+        return console.log(`${colArray[0]} wins!`);
+    }
+
+    // CHECK IF WON BY 3 IN A COLUMN
+    // for (let c = 0; c < printedBoard.length; c++) {
+    //   if [printedBoard]
+    // }
+
+    // CHECK IF WON BY DIAGONAL
+
+    // for row where there are non-empty cells, check if there is a win by column
+    // for (let colIdx = 0; colIdx < r.length; colIdx++) {
+    //   if (
+    //     printedBoard[r][colIdx] === printedBoard[r + 1][colIdx] &&
+    //     printedBoard[r][colIdx] === printedBoard[r + 2][colIdx]
+    //   )
+    //     return console.log(`${r[colIdx]} wins!`);
+    // }
     // check if any 3 continuous for column
     // console.log(printedBoard[row][column]);
 
