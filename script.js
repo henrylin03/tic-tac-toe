@@ -167,15 +167,20 @@ const screenController = (function () {
 
     // render board
     board.forEach((row) => {
-      row.forEach((cell, columnIdx) => {
+      row.forEach((cell, col) => {
         const cellBtn = document.createElement("button");
         cellBtn.classList.add("cell");
-        cellBtn.setAttribute("column", columnIdx);
+        cellBtn.setAttribute("row", row);
+        cellBtn.setAttribute("column", col);
         cellBtn.textContent = cell.getValue();
         boardElement.appendChild(cellBtn);
       });
     });
   };
+
+  // add event listener for board
+  function handleClick(e) {}
+
   // initial render
   updateScreen();
 })();
