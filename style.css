@@ -14,6 +14,11 @@
 body {
     background-color: var(--light-color);
     font-family: "Roboto", Arial, Helvetica, sans-serif;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 main {
@@ -21,13 +26,15 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100dvh;
-    gap: 50px;
+    gap: 30px;
+}
+
+h1 {
+    flex: 1;
 }
 
 .board {
-    height: 500px;
-    width: 500px;
+    flex: 4;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -38,6 +45,8 @@ main {
 }
 
 button {
+    height: 200px;
+    width: 200px;
     outline: none;
     border: none;
     cursor: pointer;
