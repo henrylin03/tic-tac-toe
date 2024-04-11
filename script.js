@@ -135,7 +135,6 @@ function createGameController(
 
 const screenController = (function () {
   const game = createGameController();
-  const playerTurnElement = document.querySelector(".turn");
   const boardElement = document.querySelector(".board");
   const resetBtn = document.querySelector(".reset");
 
@@ -148,7 +147,6 @@ const screenController = (function () {
     const activePlayer = game.getActivePlayer();
 
     // display player's turn
-    playerTurnElement.textContent = `${activePlayer.name}'s turn`;
 
     // render board
     board.forEach((row, rowIdx) => {

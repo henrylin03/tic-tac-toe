@@ -79,6 +79,14 @@ button {
     filter: brightness(90%) saturate(115%);
 }
 
+.players {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+    width: 80%;
+}
+
 .cell {
     height: 200px;
     width: 200px;
