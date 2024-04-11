@@ -68,4 +68,5 @@ button:active {
 button:active {
     filter: brightness(95%);
     filter: saturate(200%);
+    transform: scale(0.99);
 }
