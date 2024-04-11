@@ -184,6 +184,9 @@ const screenController = (function () {
 
     // make sure column/row clicked and not gaps
     if (!selectedRow || !selectedColumn) return;
+
+    game.playRound(selectedRow, selectedColumn);
+    updateScreen();
   }
 
   boardElement.addEventListener("click", handleClick);
