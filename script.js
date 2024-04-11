@@ -153,6 +153,7 @@ const screenController = (function () {
     board.forEach((row, rowIdx) => {
       row.forEach((cell, columnIdx) => {
         const cellBtn = document.createElement("button");
+        cellBtn.classList.add("cell");
         cellBtn.setAttribute("data-row", rowIdx);
         cellBtn.setAttribute("data-column", columnIdx);
         cellBtn.textContent = cell.getValue();

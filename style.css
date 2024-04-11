@@ -44,7 +44,7 @@ main {
     border: 2px solid var(--primary-color);
 }
 
-button {
+.cell {
     height: 200px;
     width: 200px;
     outline: none;
@@ -60,15 +60,15 @@ button {
     font-family: inherit;
 }
 
-button:disabled {
+.cell:disabled {
     color: inherit;
 }
 
-button:hover:enabled {
+.cell:hover:enabled {
     background-color: var(--light-color);
 }
 
-button:active:enabled {
+.cell:active:enabled {
     background-color: var(--light-color);
     filter: brightness(95%) saturate(200%);
     transform: scale(0.99);
