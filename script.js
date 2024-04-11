@@ -14,9 +14,6 @@ function createGameboard() {
 
   const addMarker = (rowIdx, columnIdx, marker) => {
     const selectedCell = board[rowIdx][columnIdx];
-
-    // existing marker already exists
-    if (selectedCell.getValue() !== null) return;
     selectedCell.setMarker(marker);
   };
 
