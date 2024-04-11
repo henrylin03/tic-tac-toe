@@ -23,7 +23,7 @@ body {
 
 header {
     padding: 40px 0 20px 0;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
 }
 
 main {
@@ -32,6 +32,10 @@ main {
     align-items: center;
     justify-content: center;
     gap: 15px;
+}
+
+h2 {
+    font-size: 20px;
 }
 
 .board {
