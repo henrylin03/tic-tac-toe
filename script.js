@@ -159,6 +159,7 @@ const screenController = (function () {
         cellBtn.setAttribute("data-row", rowIdx);
         cellBtn.setAttribute("data-column", columnIdx);
         cellBtn.textContent = cell.getValue();
+        if (cellBtn.textContent) cellBtn.disabled = true;
         boardElement.appendChild(cellBtn);
       });
     });
