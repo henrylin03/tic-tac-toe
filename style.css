@@ -60,7 +60,6 @@ button {
     border: none;
     cursor: pointer;
     font-family: inherit;
-    font-weight: bold;
 }
 
 .reset {
@@ -68,6 +67,7 @@ button {
     color: white;
     border-radius: 15px;
     padding: 8px 25px;
+    font-weight: bold;
 }
 
 .reset:hover {
@@ -87,7 +87,8 @@ button {
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
-    font-size: 5rem;
+    font-size: 180px;
+    font-weight: 100;
 }
 
 .cell:disabled {
