@@ -170,8 +170,8 @@ const screenController = (function () {
       row.forEach((cell, col) => {
         const cellBtn = document.createElement("button");
         cellBtn.classList.add("cell");
-        cellBtn.setAttribute("row", row);
-        cellBtn.setAttribute("column", col);
+        cellBtn.setAttribute("data-row", row);
+        cellBtn.setAttribute("data-column", col);
         cellBtn.textContent = cell.getValue();
         boardElement.appendChild(cellBtn);
       });
@@ -179,7 +179,9 @@ const screenController = (function () {
   };
 
   // add event listener for board
-  function handleClick(e) {}
+  function handleClick(e) {
+    const selectedRow = e.target.dataset.row;
+  }
 
   // initial render
   updateScreen();
