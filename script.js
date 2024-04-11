@@ -166,16 +166,15 @@ const screenController = (function () {
     playerTurnElement.textContent = `${activePlayer.name}'s turn...`;
 
     // render board
-    for (let rowIdx = 0; rowIdx < board.length; rowIdx++) {
-      const rowArray = board[rowIdx];
-      rowArray.forEach((cell, columnIdx) => {
+    board.forEach((row, rowIdx) => {
+      row.forEach((cell, columnIdx) => {
         const cellBtn = document.createElement("button");
         cellBtn.setAttribute("data-row", rowIdx);
         cellBtn.setAttribute("data-column", columnIdx);
         cellBtn.textContent = cell.getValue();
         boardElement.appendChild(cellBtn);
       });
-    }
+    });
   };
 
   // add event listener for board
@@ -185,6 +184,9 @@ const screenController = (function () {
 
     // make sure column/row clicked and not gaps
     if (!selectedRow || !selectedColumn) return;
+
+    console.log(selectedRow);
+    console.log(selectedColumn);
   }
 
   boardElement.addEventListener("click", handleClick);
