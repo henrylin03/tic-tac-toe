@@ -153,4 +153,13 @@ const screenController = (function () {
   const game = createGameController();
   const playerTurnElement = document.querySelector(".turn");
   const boardElement = document.querySelector(".board");
+
+  const updateScreen = () => {
+    // clear board
+    boardElement.textContent = "";
+
+    // get most up-to-date version of board, and whose turn it is
+    const board = getBoard();
+    const activePlayer = game.getActivePlayer();
+  };
 })();
