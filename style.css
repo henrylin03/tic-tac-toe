@@ -3,6 +3,7 @@
 :root {
     --primary-color: hsl(197, 100%, 40%);
     --light-color: hsl(197, 60%, 95%);
+    --grey-color: hsl(197, 20%, 50%);
 }
 
 * {
@@ -21,8 +22,8 @@ body {
 }
 
 header {
-    padding: 40px 0;
-    font-size: 1.5rem;
+    padding: 40px 0 20px 0;
+    font-size: 1.3rem;
 }
 
 main {
@@ -30,10 +31,11 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 10px;
 }
 
 .board {
+    margin: 10px 0;
     flex: 4;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -50,6 +52,22 @@ button {
     cursor: pointer;
     font-family: inherit;
     font-weight: bold;
+}
+
+.reset {
+    background-color: var(--grey-color);
+    color: white;
+    border-radius: 15px;
+    padding: 8px 25px;
+}
+
+.reset:hover {
+    filter: brightness(105%);
+}
+
+.reset:active {
+    transform: scale(0.98);
+    filter: brightness(90%) saturate(115%);
 }
 
 .cell {
