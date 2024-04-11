@@ -1,11 +1,16 @@
 :root {
     --primary-color: hsl(197, 100%, 40%);
+    --light-color: hsl(197, 60%, 95%);
 }
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+body {
+    background-color: var(--light-color);
 }
 
 main {
@@ -33,4 +38,5 @@ button {
     outline: none;
     border: none;
     cursor: pointer;
+    background: white;
 }
