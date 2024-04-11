@@ -43,8 +43,8 @@ function createGameController(
 ) {
   const board = createGameboard();
   const players = [
-    { name: playerOneName, marker: "x" },
-    { name: playerTwoName, marker: "o" },
+    { position: "playerOne", name: playerOneName, marker: "x" },
+    { position: "playerTwo", name: playerTwoName, marker: "o" },
   ];
 
   // determine active player (turn)
@@ -135,7 +135,7 @@ function createGameController(
 
 const screenController = (function () {
   const game = createGameController();
-  const playerTurnElement = document.querySelector(".turn");
+  const playerDivs = document.querySelectorAll(".player");
   const boardElement = document.querySelector(".board");
   const resetBtn = document.querySelector(".reset");
 
@@ -148,7 +148,9 @@ const screenController = (function () {
     const activePlayer = game.getActivePlayer();
 
     // display player's turn
-    playerTurnElement.textContent = `${activePlayer.name}'s turn`;
+    const activePlayerPosition = activePlayer.position;
+    playerDivs.forEach((d) => d.classList.remove("active"));
+    document.querySelector(`#${activePlayerPosition}`).classList.add("active");
 
     // render board
     board.forEach((row, rowIdx) => {
