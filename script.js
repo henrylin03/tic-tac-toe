@@ -164,6 +164,17 @@ const screenController = (function () {
 
     // display player's turn
     playerTurnElement.textContent = `${activePlayer.name}'s turn...`;
+
+    // render board
+    board.forEach((row) => {
+      row.forEach((cell, columnIdx) => {
+        const cellBtn = document.createElement("button");
+        cellBtn.classList.add("cell");
+        cellBtn.setAttribute("column", columnIdx);
+        cellBtn.textContent = cell.getValue();
+        boardElement.appendChild(cellBtn);
+      });
+    });
   };
   // initial render
   updateScreen();
