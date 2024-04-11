@@ -95,6 +95,7 @@ button {
 
 .player.active {
     color: hsl(197, 100%, 45%);
+    font-size: 1.2rem;
 }
 
 .cell {
