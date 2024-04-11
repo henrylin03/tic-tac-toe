@@ -169,7 +169,6 @@ const screenController = (function () {
     board.forEach((row) => {
       row.forEach((cell, col) => {
         const cellBtn = document.createElement("button");
-        cellBtn.classList.add("cell");
         cellBtn.setAttribute("data-row", row);
         cellBtn.setAttribute("data-column", col);
         cellBtn.textContent = cell.getValue();
@@ -180,8 +179,17 @@ const screenController = (function () {
 
   // add event listener for board
   function handleClick(e) {
-    const selectedRow = e.target.dataset.row;
+    const selectedRow = e.target.getAttribute("data-row");
+    const selectedColumn = e.target.getAttribute("data-column");
+
+    // make sure column/row clicked and not gaps
+    if (!selectedRow || !selectedColumn) return;
+
+    // console.log(selectedRow);
+    console.log(selectedColumn);
   }
+
+  boardElement.addEventListener("click", handleClick);
 
   // initial render
   updateScreen();

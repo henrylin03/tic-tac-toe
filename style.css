@@ -9,7 +9,7 @@
     background-color: hsl(197, 100%, 40%);
 }
 
-.cell {
+button {
     outline: none;
     cursor: pointer;
 }
