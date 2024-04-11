@@ -68,12 +68,6 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
 
   // todo: create function called "findWinner" or something that can be used to output the winning player's name
   const playRound = (row, column) => {
-    // add markers
-    console.log(
-      `adding ${
-        getActivePlayer().name
-      }'s mark into coordinates: row ${row}, column ${column} (zero-indexed)`
-    );
     board.addMarker(row, column, getActivePlayer().marker);
 
     // check winning condition
