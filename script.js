@@ -164,7 +164,7 @@ const screenController = (function () {
   };
 
   // add event listener for board
-  function handleClick(e) {
+  function handleClickOnBoard(e) {
     const selectedRow = e.target.getAttribute("data-row");
     const selectedColumn = e.target.getAttribute("data-column");
 
@@ -175,7 +175,7 @@ const screenController = (function () {
     updateScreen();
   }
 
-  boardElement.addEventListener("click", handleClick);
+  boardElement.addEventListener("click", handleClickOnBoard);
 
   // initial render
   updateScreen();
