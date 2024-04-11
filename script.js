@@ -49,13 +49,14 @@ const game = (function (
     { name: playerTwoName, marker: "o" },
   ];
 
+  // determine active player (turn)
   let activePlayer = players[0];
-
   const switchPlayers = () => {
     activePlayer = activePlayer === players[0] ? players[1] : players[0];
   };
   const getActivePlayer = () => activePlayer;
 
+  // methods for new rounds
   const printNewRound = () => {
     board.printBoard();
     console.log(`${getActivePlayer().name}'s turn.
@@ -145,5 +146,5 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
   // running
   printNewRound();
 
-  return { playRound };
+  return { playRound, getActivePlayer, getBoard: board.getBoard };
 })();
