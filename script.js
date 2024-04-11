@@ -184,9 +184,6 @@ const screenController = (function () {
 
     // make sure column/row clicked and not gaps
     if (!selectedRow || !selectedColumn) return;
-
-    console.log(selectedRow);
-    console.log(selectedColumn);
   }
 
   boardElement.addEventListener("click", handleClick);
