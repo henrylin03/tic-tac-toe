@@ -39,7 +39,7 @@ function createCell() {
 }
 
 // GameController will control flow and state of game's turn, and win/loss/tie
-const game = (function (
+function createGameController(
   playerOneName = "Player 1",
   playerTwoName = "Player 2"
 ) {
@@ -147,4 +147,4 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
   printNewRound();
 
   return { playRound, getActivePlayer, getBoard: board.getBoard };
-})();
+}
