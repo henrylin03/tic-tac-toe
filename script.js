@@ -149,4 +149,8 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
   return { playRound, getActivePlayer, getBoard: board.getBoard };
 }
 
-const screenController = (function () {})();
+const screenController = (function () {
+  const game = createGameController();
+  const playerTurnElement = document.querySelector(".turn");
+  const boardElement = document.querySelector(".board");
+})();
