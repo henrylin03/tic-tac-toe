@@ -159,7 +159,12 @@ const screenController = (function () {
     boardElement.textContent = "";
 
     // get most up-to-date version of board, and whose turn it is
-    const board = getBoard();
+    const board = game.getBoard();
     const activePlayer = game.getActivePlayer();
+
+    // display player's turn
+    playerTurnElement.textContent = `${activePlayer.name}'s turn...`;
   };
+  // initial render
+  updateScreen();
 })();
