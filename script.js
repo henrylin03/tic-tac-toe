@@ -137,6 +137,7 @@ const screenController = (function () {
   const game = createGameController();
   const playerTurnElement = document.querySelector(".turn");
   const boardElement = document.querySelector(".board");
+  const resetBtn = document.querySelector(".reset");
 
   const updateScreen = () => {
     // clear board
@@ -176,6 +177,12 @@ const screenController = (function () {
   }
 
   boardElement.addEventListener("click", handleClickOnBoard);
+
+  // add event listener for game reset button
+  function handleClickOnResetBtn() {
+    alert("reset");
+  }
+  resetBtn.addEventListener("click", handleClickOnResetBtn);
 
   // initial render
   updateScreen();
