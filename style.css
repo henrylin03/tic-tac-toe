@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root {
-    --primary-color: hsl(197, 100%, 40%);
+    --primary-color: hsl(197, 100%, 50%);
     --dark-color: hsl(197, 100%, 20%);
     --light-color: hsl(197, 60%, 95%);
     --grey-color: hsl(197, 20%, 50%);
@@ -85,6 +85,16 @@ button {
     justify-content: space-around;
     background-color: white;
     width: 80%;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+.player {
+    color: var(--light-color);
+}
+
+.player.active {
+    color: hsl(197, 100%, 45%);
 }
 
 .cell {
