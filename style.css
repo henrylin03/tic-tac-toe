@@ -39,4 +39,8 @@ button {
     border: none;
     cursor: pointer;
     background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
 }
