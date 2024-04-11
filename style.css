@@ -60,13 +60,16 @@ button {
     font-family: inherit;
 }
 
-button:hover,
-button:active {
+button:disabled {
+    color: inherit;
+}
+
+button:hover:enabled {
     background-color: var(--light-color);
 }
 
-button:active {
-    filter: brightness(95%);
-    filter: saturate(200%);
+button:active:enabled {
+    background-color: var(--light-color);
+    filter: brightness(95%) saturate(200%);
     transform: scale(0.99);
 }
