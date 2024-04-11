@@ -4,6 +4,15 @@
     box-sizing: border-box;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100dvh;
+    gap: 50px;
+}
+
 .board {
     height: 500px;
     width: 500px;
