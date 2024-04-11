@@ -50,3 +50,13 @@ button {
     font-weight: bold;
     font-family: inherit;
 }
+
+button:hover,
+button:active {
+    background-color: var(--light-color);
+}
+
+button:active {
+    filter: brightness(95%);
+    filter: saturate(200%);
+}
