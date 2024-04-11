@@ -180,7 +180,7 @@ const screenController = (function () {
 
   // add event listener for game reset button
   function handleClickOnResetBtn() {
-    alert("reset");
+    location.reload();
   }
   resetBtn.addEventListener("click", handleClickOnResetBtn);
 
