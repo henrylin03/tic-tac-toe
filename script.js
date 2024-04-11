@@ -14,6 +14,8 @@ function createGameboard() {
 
   const addMarker = (rowIdx, columnIdx, marker) => {
     const selectedCell = board[rowIdx][columnIdx];
+
+    // existing marker already exists
     if (selectedCell.getValue() !== null) return;
     selectedCell.setMarker(marker);
   };
@@ -22,7 +24,6 @@ function createGameboard() {
     const boardWithCellsMarked = board.map((r) =>
       r.map((cell) => cell.getValue())
     );
-    console.log(boardWithCellsMarked);
     return boardWithCellsMarked;
   };
 
@@ -57,15 +58,7 @@ function createGameController(
   const getActivePlayer = () => activePlayer;
 
   // methods for new rounds
-  const printNewRound = () => {
-    board.printBoard();
-    console.log(`${getActivePlayer().name}'s turn.
-    
-Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
-      getActivePlayer().marker
-    }" to those coordinates.`);
-  };
-
+  const printNewRound = () => board.printBoard();
   // todo: create function called "findWinner" or something that can be used to output the winning player's name
   const playRound = (row, column) => {
     board.addMarker(row, column, getActivePlayer().marker);
