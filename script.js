@@ -155,9 +155,8 @@ const screenController = (function () {
 
     // display player's turn
     const activePlayer = game.getActivePlayer();
-    const activePlayerPosition = activePlayer.position;
     playerDivs.forEach((d) => d.classList.remove("active"));
-    document.querySelector(`#${activePlayerPosition}`).classList.add("active");
+    document.querySelector(`#${activePlayer.position}`).classList.add("active");
 
     // render board
     board.forEach((row, rowIdx) => {
