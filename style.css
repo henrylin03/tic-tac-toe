@@ -131,6 +131,11 @@ dialog {
     padding: 25px 40px;
 }
 
+dialog p {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
 #result {
     font-size: 2rem;
 }
