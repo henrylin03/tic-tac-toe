@@ -187,9 +187,7 @@ const screenController = (function () {
   }
 
   // add event listener for game reset button
-  function resetGame() {
-    location.reload();
-  }
+  const resetGame = () => location.reload();
 
   boardElement.addEventListener("click", handleClickOnBoard);
   resetBtn.addEventListener("click", resetGame);
