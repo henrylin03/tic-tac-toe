@@ -135,7 +135,12 @@ function createGameController(
   // running
   printNewRound();
 
-  return { playRound, getActivePlayer, getBoard: board.getBoard };
+  return {
+    playRound,
+    getActivePlayer,
+    activePlayerHasWon,
+    getBoard: board.getBoard,
+  };
 }
 
 const screenController = (function () {
@@ -151,11 +156,11 @@ const screenController = (function () {
     // clear board
     boardElement.textContent = "";
 
-    // get most up-to-date version of board, and whose turn it is
+    // get most up-to-date version of board
     const board = game.getBoard();
-    const activePlayer = game.getActivePlayer();
 
     // display player's turn
+    const activePlayer = game.getActivePlayer();
     const activePlayerPosition = activePlayer.position;
     playerDivs.forEach((d) => d.classList.remove("active"));
     document.querySelector(`#${activePlayerPosition}`).classList.add("active");
