@@ -174,8 +174,12 @@ const screenController = (function () {
     });
 
     if (game.activePlayerHasWon() || game.allCellsMarked()) {
+      const resultText = document.querySelector("#result");
+      resultText.textContent = game.activePlayerHasWon()
+        ? `${activePlayer.name} wins!`
+        : `It's a tie!`;
+
       dialogElement.showModal();
-      console.log(activePlayer);
     }
   };
 
