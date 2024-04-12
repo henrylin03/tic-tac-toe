@@ -144,11 +144,18 @@ dialog {
     border-radius: 15px;
     padding: 25px 40px;
     width: 35vw;
-    height: 20vh;
+    height: 25vh;
+}
+
+dialog .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: auto;
+    width: 100%;
 }
 
 dialog p {
-    margin-bottom: 25px;
     text-align: center;
 }
 
@@ -160,7 +167,8 @@ dialog p {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin: 0 auto;
+    margin: auto;
+    width: 100%;
 }
 
 .btn-container button {
@@ -168,6 +176,7 @@ dialog p {
     border-radius: 15px;
     padding: 8px 25px;
     width: 30%;
+    text-wrap: nowrap;
 }
 
 button.play-again {
