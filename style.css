@@ -124,6 +124,12 @@ button {
     transform: scale(0.99);
 }
 
+/* dialog */
+::backdrop {
+    background-color: var(--grey-color);
+    opacity: .7;
+}
+
 dialog {
     margin: auto;
     border: none;
