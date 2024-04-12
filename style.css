@@ -112,6 +112,7 @@ button {
 
 .cell:disabled {
     color: inherit;
+    cursor: auto;
 }
 
 .cell:hover:enabled {
