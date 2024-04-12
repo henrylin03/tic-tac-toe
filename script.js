@@ -55,7 +55,8 @@ function createGameController(
   const printNewRound = () => board.printBoard();
 
   // returns `true` if win. otherwise returns `false`
-  const activePlayerHasWon = (currentBoard) => {
+  const activePlayerHasWon = () => {
+    const currentBoard = board.printBoard();
     const winByRow = () => {
       for (let r = 0; r < currentBoard.length; r++) {
         const hasWon = currentBoard[r].every(
@@ -116,18 +117,12 @@ function createGameController(
     return winByRow() || winByColumn() || winByDiagonal();
   };
 
-  const allCellsMarked = () => !board.printBoard().flat(1).includes(null);
-
   const playRound = (row, column) => {
     board.addMarker(row, column, getActivePlayer().marker);
+    const allCellsMarked = () => !board.printBoard().flat(1).includes(null);
 
-    const printedBoard = board.printBoard();
-    const printedBoardFlat = printedBoard.flat(1);
-    const markersCount = printedBoardFlat.filter((c) => c).length;
-
-    if (markersCount >= 5 && activePlayerHasWon(printedBoard))
-      console.log(`${activePlayer.name} wins`);
-    else if (allCellsMarked()) return console.log("it's a tie!");
+    if (activePlayerHasWon()) console.log(`${activePlayer.name} wins`);
+    else if (allCellsMarked()) console.log("it's a tie");
 
     switchPlayers();
     printNewRound();
