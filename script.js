@@ -167,7 +167,8 @@ const screenController = (function () {
         cellBtn.setAttribute("data-row", rowIdx);
         cellBtn.setAttribute("data-column", columnIdx);
         cellBtn.textContent = cell.getValue();
-        if (cellBtn.textContent) cellBtn.disabled = true;
+        if (cellBtn.textContent || game.activePlayerHasWon())
+          cellBtn.disabled = true;
         boardElement.appendChild(cellBtn);
       });
     });
@@ -178,17 +179,7 @@ const screenController = (function () {
     const selectedRow = e.target.getAttribute("data-row");
     const selectedColumn = e.target.getAttribute("data-column");
 
-    if (!selectedRow || !selectedColumn) return;
-    if (game.activePlayerHasWon() || game.allCellsMarked()) {
-      // disable all buttons on board
-      const gridCellsElements = document.querySelectorAll(".cell");
-      console.log(gridCellsElements);
-      gridCellsElements.forEach((cell) => (cell.disabled = true));
-      boardElement.removeEventListener("click", handleClickOnBoard);
-      // updateScreen();
-
-      return;
-    }
+    if (!selectedRow || !selectedColumn || game.activePlayerHasWon()) return;
 
     game.playRound(selectedRow, selectedColumn);
     updateScreen();
