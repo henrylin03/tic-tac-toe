@@ -178,8 +178,17 @@ const screenController = (function () {
     const selectedRow = e.target.getAttribute("data-row");
     const selectedColumn = e.target.getAttribute("data-column");
 
-    // make sure column/row clicked and not gaps
     if (!selectedRow || !selectedColumn) return;
+    if (game.activePlayerHasWon() || game.allCellsMarked()) {
+      // disable all buttons on board
+      const gridCellsElements = document.querySelectorAll(".cell");
+      console.log(gridCellsElements);
+      gridCellsElements.forEach((cell) => (cell.disabled = true));
+      boardElement.removeEventListener("click", handleClickOnBoard);
+      // updateScreen();
+
+      return;
+    }
 
     game.playRound(selectedRow, selectedColumn);
     updateScreen();
