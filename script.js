@@ -1,3 +1,12 @@
+function createCell() {
+  let value = null;
+
+  const setMarker = (marker) => (value = marker);
+  const getValue = () => value;
+
+  return { setMarker, getValue };
+}
+
 function createGameboard() {
   const ROWS = 3;
   const COLUMNS = 3;
@@ -11,112 +20,80 @@ function createGameboard() {
   }
 
   const getBoard = () => board;
+
   const addMarker = (rowIdx, columnIdx, marker) => {
     const selectedCell = board[rowIdx][columnIdx];
-
-    if (selectedCell.getValue() !== null) return;
-
     selectedCell.setMarker(marker);
   };
 
-  // ? this might be removed / modified after we move to a UI version (rather than the current, console version)
   const printBoard = () => {
     const boardWithCellsMarked = board.map((r) =>
       r.map((cell) => cell.getValue())
     );
-    console.log(boardWithCellsMarked);
     return boardWithCellsMarked;
   };
 
-  // return _interface_ (rather than board itself) for rest of application to interact with gameboard
   return { getBoard, addMarker, printBoard };
 }
 
-function createCell() {
-  let value = null;
-
-  // accept player's mark ("x" or "o") to change value of cell
-  const setMarker = (marker) => (value = marker);
-  // retrieve current value of cell through closure
-  const getValue = () => value;
-
-  return { setMarker, getValue };
-}
-
-// GameController will control flow and state of game's turn, and win/loss/tie
-// ? this should probably be an IIFE if only used once
-const game = (function (
+function createGameController(
   playerOneName = "Player 1",
   playerTwoName = "Player 2"
 ) {
   const board = createGameboard();
   const players = [
-    { name: playerOneName, marker: "x" },
-    { name: playerTwoName, marker: "o" },
+    { position: "playerOne", name: playerOneName, marker: "x" },
+    { position: "playerTwo", name: playerTwoName, marker: "o" },
   ];
 
   let activePlayer = players[0];
-
   const switchPlayers = () => {
     activePlayer = activePlayer === players[0] ? players[1] : players[0];
   };
   const getActivePlayer = () => activePlayer;
 
-  const printNewRound = () => {
-    board.printBoard();
-    console.log(`${getActivePlayer().name}'s turn.
-    
-Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
-      getActivePlayer().marker
-    }" to those coordinates.`);
-  };
+  const printNewRound = () => board.printBoard();
 
-  // todo: create function called "findWinner" or something that can be used to output the winning player's name
-  const playRound = (row, column) => {
-    // add markers
-    console.log(
-      `adding ${
-        getActivePlayer().name
-      }'s mark into coordinates: row ${row}, column ${column} (zero-indexed)`
-    );
-    board.addMarker(row, column, getActivePlayer().marker);
+  // returns `true` if win. otherwise returns `false`
+  const activePlayerHasWon = () => {
+    const currentBoard = board.printBoard();
+    const winByRow = () => {
+      for (let r = 0; r < currentBoard.length; r++) {
+        const hasWon = currentBoard[r].every(
+          (currentValue) => currentValue === currentBoard[r][0]
+        );
+        if (currentBoard[r].includes(null)) continue;
+        if (hasWon) return true;
+      }
+      return false;
+    };
 
-    // check winning condition
-    const printedBoard = board.printBoard();
+    const winByColumn = () => {
+      for (let c = 0; c < currentBoard[0].length; c++) {
+        const colArray = [
+          currentBoard[0][c],
+          currentBoard[1][c],
+          currentBoard[2][c],
+        ];
+        const hasWon = colArray.every(
+          (currentValue) => currentValue === colArray[0]
+        );
+        if (colArray.includes(null)) continue;
+        if (hasWon) return true;
+      }
+      return false;
+    };
 
-    // CHECK IF WON BY 3 IN A ROW
-    for (let r = 0; r < printedBoard.length; r++) {
-      if (printedBoard[r].includes(null)) continue;
-      if (
-        printedBoard[r].every(
-          (currentValue) => currentValue === printedBoard[r][0]
-        )
-      )
-        return console.log(`${printedBoard[r][0]} wins!`);
-    }
+    const winByDiagonal = () => {
+      const centreCell = currentBoard[1][1];
+      // skip if centre cell is null
+      if (centreCell === null) return false;
 
-    // CHECK IF WON BY 3 IN A COLUMN
-    for (let c = 0; c < printedBoard[0].length; c++) {
-      const colArray = [
-        printedBoard[0][c],
-        printedBoard[1][c],
-        printedBoard[2][c],
-      ];
-
-      if (colArray.includes(null)) continue;
-      if (colArray.every((currentValue) => currentValue === colArray[0]))
-        return console.log(`${colArray[0]} wins!`);
-    }
-
-    // CHECK IF WON BY DIAGONAL
-    // to win by diagonal, the centre value needs to be there
-    const centreCell = printedBoard[1][1];
-    if (centreCell != null) {
       const cornerCellsLookup = {
-        topLeft: printedBoard[0][0],
-        topRight: printedBoard[0][2],
-        bottomLeft: printedBoard[2][0],
-        bottomRight: printedBoard[2][2],
+        topLeft: currentBoard[0][0],
+        topRight: currentBoard[0][2],
+        bottomLeft: currentBoard[2][0],
+        bottomRight: currentBoard[2][2],
       };
       const topLeftToBottomRightDiagonalArr = [
         centreCell,
@@ -128,22 +105,23 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
         cornerCellsLookup.topRight,
         cornerCellsLookup.bottomLeft,
       ];
-
       const isSameMarker = (arr) =>
         arr.every((currentValue) => currentValue === centreCell);
 
-      if (
+      return (
         isSameMarker(topLeftToBottomRightDiagonalArr) ||
         isSameMarker(topRightToBottomLeftDiagonalArr)
-      )
-        return console.log(`${centreCell} wins!`);
-    }
+      );
+    };
 
-    // then, if there are no more free spaces, it is a tie.
-    const printedBoardFlattened = printedBoard.flat(1);
-    if (!printedBoardFlattened.includes(null))
-      return console.log("it's a tie!");
+    return winByRow() || winByColumn() || winByDiagonal();
+  };
 
+  const allCellsMarked = () => !board.printBoard().flat(1).includes(null);
+
+  const playRound = (row, column) => {
+    board.addMarker(row, column, getActivePlayer().marker);
+    if (activePlayerHasWon() || allCellsMarked()) return;
     switchPlayers();
     printNewRound();
   };
@@ -151,5 +129,78 @@ Please enter game.playRound(rowNumber, columnNumber) to place your marker "${
   // running
   printNewRound();
 
-  return { playRound };
+  return {
+    playRound,
+    getActivePlayer,
+    activePlayerHasWon,
+    allCellsMarked,
+    getBoard: board.getBoard,
+  };
+}
+
+const screenController = (function () {
+  const game = createGameController();
+  const playerDivs = document.querySelectorAll(".player");
+  const boardElement = document.querySelector(".board");
+  const resetBtn = document.querySelector(".reset");
+  const dialogElement = document.querySelector("dialog");
+  const playAgainBtn = document.querySelector(".play-again");
+  const closeModalBtn = document.querySelector(".close");
+
+  const updateScreen = () => {
+    // clear board
+    boardElement.textContent = "";
+
+    // get most up-to-date version of board
+    const board = game.getBoard();
+
+    // display player's turn
+    const activePlayer = game.getActivePlayer();
+    playerDivs.forEach((d) => d.classList.remove("active"));
+    document.querySelector(`#${activePlayer.position}`).classList.add("active");
+
+    // render board
+    board.forEach((row, rowIdx) => {
+      row.forEach((cell, columnIdx) => {
+        const cellBtn = document.createElement("button");
+        cellBtn.classList.add("cell");
+        cellBtn.setAttribute("data-row", rowIdx);
+        cellBtn.setAttribute("data-column", columnIdx);
+        cellBtn.textContent = cell.getValue();
+        if (cellBtn.textContent || game.activePlayerHasWon())
+          cellBtn.disabled = true;
+        boardElement.appendChild(cellBtn);
+      });
+    });
+
+    if (game.activePlayerHasWon() || game.allCellsMarked()) {
+      const resultText = document.querySelector("#result");
+      resultText.textContent = game.activePlayerHasWon()
+        ? `${activePlayer.name} wins!`
+        : `It's a tie!`;
+
+      dialogElement.showModal();
+    }
+  };
+
+  // add event listener for board
+  function handleClickOnBoard(e) {
+    const selectedRow = e.target.getAttribute("data-row");
+    const selectedColumn = e.target.getAttribute("data-column");
+
+    if (!selectedRow || !selectedColumn) return;
+
+    game.playRound(selectedRow, selectedColumn);
+    updateScreen();
+  }
+
+  // add event listener for game reset button
+  const resetGame = () => location.reload();
+
+  boardElement.addEventListener("click", handleClickOnBoard);
+  resetBtn.addEventListener("click", resetGame);
+  playAgainBtn.addEventListener("click", resetGame);
+  closeModalBtn.addEventListener("click", () => dialogElement.close());
+
+  updateScreen();
 })();
