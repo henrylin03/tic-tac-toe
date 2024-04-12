@@ -24,17 +24,22 @@ body {
 }
 
 header {
-    padding: 40px 0 20px 0;
+    padding: 20px 0 20px 0;
+    width: 30%;
+}
+
+h1 {
     font-family: "Satisfy", cursive;
-    font-size: 1.1rem;
+    font-size: 40px;
+    text-align: center;
     color: var(--dark-color);
     letter-spacing: -1.5px;
+    margin-bottom: 5px;
 }
 
 main {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     gap: 15px;
 }
@@ -44,8 +49,7 @@ h2 {
 }
 
 .board {
-    margin: 10px 0;
-    flex: 4;
+    margin-top: 10px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -63,20 +67,21 @@ button {
 }
 
 .reset {
-    background-color: var(--grey-color);
-    color: white;
-    border-radius: 15px;
-    padding: 8px 25px;
+    background-color: white;
+    color: var(--grey-color);
+    box-shadow: 1px 1px 2px 1px hsl(197, 71%, 80%);
+    border-radius: 20%;
+    padding: 5px 6px;
     font-weight: bold;
 }
 
 .reset:hover {
-    filter: brightness(105%);
+    filter: brightness(95%);
 }
 
 .reset:active {
-    transform: scale(0.98);
-    filter: brightness(90%) saturate(115%);
+    transform: scale(0.97);
+    filter: brightness(90%);
 }
 
 .players {
@@ -84,9 +89,10 @@ button {
     align-items: center;
     justify-content: space-around;
     background-color: white;
-    width: 80%;
-    padding: 10px;
+    width: 100%;
+    padding: 5px;
     border-radius: 25px;
+    box-shadow: 1px 1px 2px 1px hsl(197, 71%, 80%);
 }
 
 .player {
