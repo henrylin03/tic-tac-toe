@@ -142,17 +142,19 @@ dialog {
     margin: auto;
     border: none;
     border-radius: 15px;
-    padding: 25px 40px;
+    padding: 40px 0;
     width: 35vw;
-    height: 25vh;
 }
 
 dialog .inner {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
     margin: auto;
     width: 100%;
+    height: 100%;
 }
 
 dialog p {
@@ -165,7 +167,7 @@ dialog p {
 
 .btn-container {
     display: flex;
-    align-items: center;
+    justify-content: center;
     gap: 15px;
     margin: auto;
     width: 100%;
