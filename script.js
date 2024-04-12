@@ -178,7 +178,7 @@ const screenController = (function () {
     const selectedRow = e.target.getAttribute("data-row");
     const selectedColumn = e.target.getAttribute("data-column");
 
-    if (!selectedRow || !selectedColumn || game.activePlayerHasWon()) return;
+    if (!selectedRow || !selectedColumn) return;
 
     game.playRound(selectedRow, selectedColumn);
     updateScreen();
