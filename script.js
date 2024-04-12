@@ -1,3 +1,12 @@
+function createCell() {
+  let value = null;
+
+  const setMarker = (marker) => (value = marker);
+  const getValue = () => value;
+
+  return { setMarker, getValue };
+}
+
 function createGameboard() {
   const ROWS = 3;
   const COLUMNS = 3;
@@ -27,16 +36,6 @@ function createGameboard() {
   return { getBoard, addMarker, printBoard };
 }
 
-function createCell() {
-  let value = null;
-
-  const setMarker = (marker) => (value = marker);
-  const getValue = () => value;
-
-  return { setMarker, getValue };
-}
-
-// GameController will control flow and state of game's turn, and win/loss/tie
 function createGameController(
   playerOneName = "Player 1",
   playerTwoName = "Player 2"
@@ -54,48 +53,46 @@ function createGameController(
   };
   const getActivePlayer = () => activePlayer;
 
-  // methods for new rounds
   const printNewRound = () => board.printBoard();
-  // todo: create function called "findWinner" or something that can be used to output the winning player's name
-  const playRound = (row, column) => {
-    board.addMarker(row, column, getActivePlayer().marker);
 
-    // check winning condition
-    const printedBoard = board.printBoard();
+  const activePlayerHasWon = (currentBoard) => {
+    const winByRow = () => {
+      for (let r = 0; r < currentBoard.length; r++) {
+        const hasWon = currentBoard[r].every(
+          (currentValue) => currentValue === currentBoard[r][0]
+        );
+        if (currentBoard[r].includes(null)) continue;
+        if (hasWon) return true;
+      }
+      return false;
+    };
 
-    // CHECK IF WON BY 3 IN A ROW
-    for (let r = 0; r < printedBoard.length; r++) {
-      if (printedBoard[r].includes(null)) continue;
-      if (
-        printedBoard[r].every(
-          (currentValue) => currentValue === printedBoard[r][0]
-        )
-      )
-        return console.log(`${printedBoard[r][0]} wins!`);
-    }
+    const winByColumn = () => {
+      for (let c = 0; c < currentBoard[0].length; c++) {
+        const colArray = [
+          currentBoard[0][c],
+          currentBoard[1][c],
+          currentBoard[2][c],
+        ];
+        const hasWon = colArray.every(
+          (currentValue) => currentValue === colArray[0]
+        );
+        if (colArray.includes(null)) continue;
+        if (hasWon) return true;
+      }
+      return false;
+    };
 
-    // CHECK IF WON BY 3 IN A COLUMN
-    for (let c = 0; c < printedBoard[0].length; c++) {
-      const colArray = [
-        printedBoard[0][c],
-        printedBoard[1][c],
-        printedBoard[2][c],
-      ];
+    const winByDiagonal = () => {
+      const centreCell = currentBoard[1][1];
+      // skip if centre cell is null
+      if (centreCell === null) return false;
 
-      if (colArray.includes(null)) continue;
-      if (colArray.every((currentValue) => currentValue === colArray[0]))
-        return console.log(`${colArray[0]} wins!`);
-    }
-
-    // CHECK IF WON BY DIAGONAL
-    // to win by diagonal, the centre value needs to be there
-    const centreCell = printedBoard[1][1];
-    if (centreCell != null) {
       const cornerCellsLookup = {
-        topLeft: printedBoard[0][0],
-        topRight: printedBoard[0][2],
-        bottomLeft: printedBoard[2][0],
-        bottomRight: printedBoard[2][2],
+        topLeft: currentBoard[0][0],
+        topRight: currentBoard[0][2],
+        bottomLeft: currentBoard[2][0],
+        bottomRight: currentBoard[2][2],
       };
       const topLeftToBottomRightDiagonalArr = [
         centreCell,
@@ -107,20 +104,28 @@ function createGameController(
         cornerCellsLookup.topRight,
         cornerCellsLookup.bottomLeft,
       ];
-
       const isSameMarker = (arr) =>
         arr.every((currentValue) => currentValue === centreCell);
 
-      if (
+      return (
         isSameMarker(topLeftToBottomRightDiagonalArr) ||
         isSameMarker(topRightToBottomLeftDiagonalArr)
-      )
-        return console.log(`${centreCell} wins!`);
-    }
+      );
+    };
 
-    // then, if there are no more free spaces, it is a tie.
-    const printedBoardFlattened = printedBoard.flat(1);
-    if (!printedBoardFlattened.includes(null))
+    return winByRow() || winByColumn() || winByDiagonal();
+  };
+
+  const playRound = (row, column) => {
+    board.addMarker(row, column, getActivePlayer().marker);
+
+    const printedBoard = board.printBoard();
+    const printedBoardFlat = printedBoard.flat(1);
+    const markersCount = printedBoardFlat.filter((c) => c).length;
+
+    if (markersCount >= 5 && activePlayerHasWon(printedBoard))
+      console.log(`${activePlayer.name} wins`);
+    else if (printedBoardFlat.length === markersCount)
       return console.log("it's a tie!");
 
     switchPlayers();
