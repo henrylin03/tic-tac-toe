@@ -117,13 +117,10 @@ function createGameController(
     return winByRow() || winByColumn() || winByDiagonal();
   };
 
+  const allCellsMarked = () => !board.printBoard().flat(1).includes(null);
+
   const playRound = (row, column) => {
     board.addMarker(row, column, getActivePlayer().marker);
-    const allCellsMarked = () => !board.printBoard().flat(1).includes(null);
-
-    if (activePlayerHasWon()) console.log(`${activePlayer.name} wins`);
-    else if (allCellsMarked()) console.log("it's a tie");
-
     switchPlayers();
     printNewRound();
   };
@@ -135,6 +132,7 @@ function createGameController(
     playRound,
     getActivePlayer,
     activePlayerHasWon,
+    allCellsMarked,
     getBoard: board.getBoard,
   };
 }
