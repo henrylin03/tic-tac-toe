@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-tac-toe</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -24,7 +25,15 @@
         </article>
         <article class="board"></article>
     </main>
-    <script src="script.js"></script>
+
+    <dialog>
+        <strong id="result">Player 1 wins!</strong>
+        <div class="btn-container">
+            <button type="button" class="play-again">Play again</button>
+            <button type="button" class="close">Close</button>
+        </div>
+    </dialog>
+    <button id="btn">open</button>
 </body>
 
 </html>

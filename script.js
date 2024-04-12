@@ -143,6 +143,9 @@ const screenController = (function () {
   const playerDivs = document.querySelectorAll(".player");
   const boardElement = document.querySelector(".board");
   const resetBtn = document.querySelector(".reset");
+  const dialogElement = document.querySelector("dialog");
+  const playAgainBtn = document.querySelector(".play-again");
+  const closeModalBtn = document.querySelector(".close");
 
   const updateScreen = () => {
     // clear board
@@ -183,14 +186,22 @@ const screenController = (function () {
     updateScreen();
   }
 
-  boardElement.addEventListener("click", handleClickOnBoard);
-
   // add event listener for game reset button
-  function handleClickOnResetBtn() {
+  function resetGame() {
     location.reload();
   }
-  resetBtn.addEventListener("click", handleClickOnResetBtn);
+
+  boardElement.addEventListener("click", handleClickOnBoard);
+  resetBtn.addEventListener("click", resetGame);
+  playAgainBtn.addEventListener("click", resetGame);
+  closeModalBtn.addEventListener("click", () => dialogElement.close());
 
   // initial render
   updateScreen();
 })();
+
+// TODO: delete this - this is just to test modal
+const dialog = document.querySelector("dialog");
+const btn = document.querySelector("#btn");
+
+btn.addEventListener("click", () => dialog.showModal());

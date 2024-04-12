@@ -123,3 +123,40 @@ button {
     filter: brightness(95%) saturate(200%);
     transform: scale(0.99);
 }
+
+dialog {
+    margin: auto;
+    border: none;
+    border-radius: 15px;
+    padding: 25px 40px;
+}
+
+#result {
+    font-size: 2rem;
+}
+
+.btn-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-container button {
+    font-weight: bold;
+    border-radius: 15px;
+    padding: 8px 25px;
+}
+
+button.play-again {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-container button:hover {
+    filter: brightness(103%);
+}
+
+.btn-container button:active {
+    transform: scale(0.98);
+    filter: brightness(90%) saturate(115%);
+}
