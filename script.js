@@ -121,6 +121,7 @@ function createGameController(
 
   const playRound = (row, column) => {
     board.addMarker(row, column, getActivePlayer().marker);
+    if (activePlayerHasWon() || allCellsMarked()) return;
     switchPlayers();
     printNewRound();
   };
@@ -174,6 +175,7 @@ const screenController = (function () {
 
     if (game.activePlayerHasWon() || game.allCellsMarked()) {
       dialogElement.showModal();
+      console.log(activePlayer);
     }
   };
 
