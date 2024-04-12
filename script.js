@@ -171,6 +171,10 @@ const screenController = (function () {
         boardElement.appendChild(cellBtn);
       });
     });
+
+    if (game.activePlayerHasWon() || game.allCellsMarked()) {
+      dialogElement.showModal();
+    }
   };
 
   // add event listener for board
@@ -192,12 +196,5 @@ const screenController = (function () {
   playAgainBtn.addEventListener("click", resetGame);
   closeModalBtn.addEventListener("click", () => dialogElement.close());
 
-  // initial render
   updateScreen();
 })();
-
-// TODO: delete this - this is just to test modal
-const dialog = document.querySelector("dialog");
-const btn = document.querySelector("#btn");
-
-btn.addEventListener("click", () => dialog.showModal());
