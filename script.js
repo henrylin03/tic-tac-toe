@@ -41,6 +41,7 @@ function createGameController(
   playerTwoName = "Player 2"
 ) {
   const board = createGameboard();
+  // we assume player one (going first) is "X"
   const players = [
     { position: "playerOne", name: playerOneName, marker: "x" },
     { position: "playerTwo", name: playerTwoName, marker: "o" },
