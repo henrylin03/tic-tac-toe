@@ -14,6 +14,21 @@
     box-sizing: border-box;
 }
 
+button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+input {
+    font: inherit;
+    outline: none;
+    border: none;
+    text-align: center;
+}
+
 body {
     background-color: var(--light-color);
     font-family: "Roboto", Arial, Helvetica, sans-serif;
@@ -60,14 +75,6 @@ h2 {
     border: 2px solid var(--primary-color);
 }
 
-button {
-    outline: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 1rem;
-}
-
 .reset {
     background-color: white;
     color: var(--grey-color);
@@ -92,18 +99,37 @@ button {
     justify-content: space-around;
     background-color: white;
     width: 100%;
-    padding: 5px;
+    padding: 10px;
     border-radius: 25px;
     box-shadow: 1px 1px 2px 1px hsl(197, 71%, 80%);
 }
 
-.player {
-    color: var(--light-color);
+.player input {
+    color: hsl(197, 80%, 70%);
+    border-bottom: 2px solid hsl(197, 100%, 90%);
+    padding: 5px 0;
+    width: 150px;
 }
 
-.player.active {
+.player.active input {
     color: hsl(197, 100%, 45%);
+    border-bottom: 2px solid hsl(197, 100%, 55%);
     font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.player input:focus {
+    transform: scale(1.08);
+    font-weight: normal;
+}
+
+.player.active input:focus {
+    color: hsl(197, 80%, 55%);
+
+}
+
+.player input::placeholder {
+    color: inherit;
 }
 
 .cell {

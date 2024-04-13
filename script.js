@@ -140,9 +140,12 @@ function createGameController(
 
 const screenController = (function () {
   const game = createGameController();
+
   const playerDivs = document.querySelectorAll(".player");
   const boardElement = document.querySelector(".board");
   const resetBtn = document.querySelector(".reset");
+
+  // modal/dialog element that shows results
   const dialogElement = document.querySelector("dialog");
   const playAgainBtn = document.querySelector(".play-again");
   const closeModalBtn = document.querySelector(".close");
