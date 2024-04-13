@@ -147,8 +147,8 @@ const screenController = (function () {
   const playAgainBtn = document.querySelector(".play-again");
   const closeModalBtn = document.querySelector(".close");
 
-  let playerOneName = playerOneInput.value || "Player 1";
-  let playerTwoName = playerTwoInput.value || "Player 2";
+  let playerOneName;
+  let playerTwoName;
   const game = createGameController(playerOneName, playerTwoName);
 
   const updateScreen = () => {
@@ -202,8 +202,17 @@ const screenController = (function () {
   // add event listener for game reset button
   const resetGame = () => location.reload();
 
+  const updatePlayerName = (e) => {
+    const elementName = e.target.getAttribute("name");
+    if (elementName === "playerOne") playerOneName = playerOneInput.value;
+    else playerTwoName = playerTwoInput.value;
+    updateScreen();
+    console.log(playerOneName, playerTwoName);
+  };
+
   boardElement.addEventListener("click", handleClickOnBoard);
-  playerOneInput.addEventListener("input", () => alert("changing"));
+  playerOneInput.addEventListener("input", updatePlayerName);
+  playerTwoInput.addEventListener("input", updatePlayerName);
   resetBtn.addEventListener("click", resetGame);
   playAgainBtn.addEventListener("click", resetGame);
   closeModalBtn.addEventListener("click", () => dialogElement.close());
