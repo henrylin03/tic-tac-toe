@@ -140,16 +140,17 @@ function createGameController(
 }
 
 const screenController = (function () {
-  const game = createGameController();
-
-  const playerDivs = document.querySelectorAll(".player");
   const boardElement = document.querySelector(".board");
   const resetBtn = document.querySelector(".reset");
+  const playerOneInput = document.querySelector("#playerOneName");
+  const playerTwoInput = document.querySelector("#playerTwoName");
 
   // modal/dialog element that shows results
   const dialogElement = document.querySelector("dialog");
   const playAgainBtn = document.querySelector(".play-again");
   const closeModalBtn = document.querySelector(".close");
+
+  const game = createGameController();
 
   const updateScreen = () => {
     // clear board
@@ -159,6 +160,7 @@ const screenController = (function () {
     const board = game.getBoard();
 
     // display player's turn
+    const playerDivs = document.querySelectorAll(".player");
     const activePlayer = game.getActivePlayer();
     playerDivs.forEach((d) => d.classList.remove("active"));
     document.querySelector(`#${activePlayer.position}`).classList.add("active");
