@@ -36,12 +36,12 @@ function createGameboard() {
   return { getBoard, addMarker, printBoard };
 }
 
-function createGameController(playerOneName, playerTwoName) {
+function createGameController() {
   const board = createGameboard();
   // we assume player one (going first) is "X"
   const players = [
-    { position: "playerOne", name: playerOneName, marker: "x" },
-    { position: "playerTwo", name: playerTwoName, marker: "o" },
+    { position: "playerOne", marker: "x" },
+    { position: "playerTwo", marker: "o" },
   ];
 
   let activePlayer = players[0];
@@ -137,19 +137,15 @@ function createGameController(playerOneName, playerTwoName) {
 }
 
 const screenController = (function () {
+  const game = createGameController();
+
   const boardElement = document.querySelector(".board");
   const resetBtn = document.querySelector(".reset");
   const playerOneInput = document.querySelector("#playerOneName");
   const playerTwoInput = document.querySelector("#playerTwoName");
-
-  // modal/dialog element that shows results
   const dialogElement = document.querySelector("dialog");
   const playAgainBtn = document.querySelector(".play-again");
   const closeModalBtn = document.querySelector(".close");
-
-  let playerOneName;
-  let playerTwoName;
-  const game = createGameController(playerOneName, playerTwoName);
 
   const updateScreen = () => {
     // clear board
@@ -181,7 +177,7 @@ const screenController = (function () {
     if (game.activePlayerHasWon() || game.allCellsMarked()) {
       const resultText = document.querySelector("#result");
       resultText.textContent = game.activePlayerHasWon()
-        ? `${activePlayer.name} wins!`
+        ? `${getPlayerName(activePlayer.position)} wins!`
         : `It's a tie!`;
 
       dialogElement.showModal();
@@ -202,17 +198,17 @@ const screenController = (function () {
   // add event listener for game reset button
   const resetGame = () => location.reload();
 
-  const updatePlayerName = (e) => {
-    const elementName = e.target.getAttribute("name");
-    if (elementName === "playerOne") playerOneName = playerOneInput.value;
-    else playerTwoName = playerTwoInput.value;
-    updateScreen();
-    console.log(playerOneName, playerTwoName);
-  };
+  function getPlayerName(playerPosition) {
+    const inputElement =
+      playerPosition === "playerOne" ? playerOneInput : playerTwoInput;
+
+    const name = inputElement.value.replace(/\s/g, "")
+      ? inputElement.value
+      : inputElement.getAttribute("placeholder");
+    return name;
+  }
 
   boardElement.addEventListener("click", handleClickOnBoard);
-  playerOneInput.addEventListener("input", updatePlayerName);
-  playerTwoInput.addEventListener("input", updatePlayerName);
   resetBtn.addEventListener("click", resetGame);
   playAgainBtn.addEventListener("click", resetGame);
   closeModalBtn.addEventListener("click", () => dialogElement.close());
