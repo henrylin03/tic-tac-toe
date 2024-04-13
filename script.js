@@ -203,6 +203,7 @@ const screenController = (function () {
   const resetGame = () => location.reload();
 
   boardElement.addEventListener("click", handleClickOnBoard);
+  playerOneInput.addEventListener("input", () => alert("changing"));
   resetBtn.addEventListener("click", resetGame);
   playAgainBtn.addEventListener("click", resetGame);
   closeModalBtn.addEventListener("click", () => dialogElement.close());
