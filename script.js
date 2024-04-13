@@ -36,10 +36,7 @@ function createGameboard() {
   return { getBoard, addMarker, printBoard };
 }
 
-function createGameController(
-  playerOneName = "Player 1",
-  playerTwoName = "Player 2"
-) {
+function createGameController(playerOneName, playerTwoName) {
   const board = createGameboard();
   // we assume player one (going first) is "X"
   const players = [
@@ -150,7 +147,9 @@ const screenController = (function () {
   const playAgainBtn = document.querySelector(".play-again");
   const closeModalBtn = document.querySelector(".close");
 
-  const game = createGameController();
+  let playerOneName = playerOneInput.value || "Player 1";
+  let playerTwoName = playerTwoInput.value || "Player 2";
+  const game = createGameController(playerOneName, playerTwoName);
 
   const updateScreen = () => {
     // clear board
