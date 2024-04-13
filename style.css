@@ -65,6 +65,7 @@ button {
     border: none;
     cursor: pointer;
     font-family: inherit;
+    font-size: 1rem;
 }
 
 .reset {
@@ -175,9 +176,9 @@ dialog p {
 
 .btn-container button {
     font-weight: bold;
-    border-radius: 15px;
-    padding: 8px 25px;
-    width: 30%;
+    border-radius: 20px;
+    padding: 10px 0;
+    width: 175px;
     text-wrap: nowrap;
 }
 
